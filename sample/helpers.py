@@ -22,13 +22,22 @@ def kradial(m,a,b):
 
     Outputs
     -------
-    roots :
-    F     :
-    f_cheb:
+    f_cheb: output from the from_function method from the Chebfun class.
+        See "BattlesTrefethen.ipynb in the github page for help)
+        
+        
+
+    roots : def
+        a method (function) included in the Chebfun class defined in 
+        chebfun.py (see github page for pychebfun in docs)
+    F     : 
     """
+    # creating a chebfun
     Jp = lambda m,x : 0.5*(sp.jv(m-1,x) - sp.jv(m+1,x))
     Yp = lambda m,x : 0.5*(sp.yv(m-1,x) - sp.yv(m+1,x))
     F = lambda k,m,a,b :Jp(m,k*a)*Yp(m,k*b)-Jp(m,k*b)*Yp(m,k*a) 
+
+
     f_cheb = pychebfun.Chebfun.from_function(lambda x: F(x, m, a, b), domain = (5,100))
     re_roots = f_cheb.roots().real
     im_roots = f_cheb.roots().imag
