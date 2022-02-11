@@ -7,8 +7,8 @@ from scipy.optimize import fsolve, minimize
 import pychebfun
 import matplotlib.pyplot as plt
 import scipy.optimize as opt
-# from scipy.optimize import brentq
-
+from scipy.optimize import brentq
+import sample.helpers as fcn 
 
 
 # k_wave = omega/c0               # wave number
@@ -49,34 +49,13 @@ import scipy.optimize as opt
 
 
 
-def kradial(m,a,b):
-    Jp = lambda m,x : 0.5*(sp.jv(m-1,x) - sp.jv(m+1,x))
-    Yp = lambda m,x : 0.5*(sp.yv(m-1,x) - sp.yv(m+1,x))
-    F = lambda k,m,a,b :Jp(m,k*a)*Yp(m,k*b)-Jp(m,k*b)*Yp(m,k*a) 
-    f_cheb = pychebfun.Chebfun.from_function(lambda x: F(x, m, a, b), domain = (5,100))
-    re_roots = f_cheb.roots().real
-    im_roots = f_cheb.roots().imag
-    roots = re_roots + im_roots*1j 
-    return roots, re_roots, im_roots, F, f_cheb
-
-
-def k_axial(M, krad):
-    freq = 5726.6
-    omega = 2*np.pi*freq                      # angular frequency
-    c0 = 343.15                          # speed of sound
-    # rho0 = 1.225                        # density
-    k_wave = omega/c0               # wave number
-    beta = 1-M**2
-    kaxial = (-M*k_wave + np.sqrt(k_wave**2 - beta*krad**2)) / beta 
-    return kaxial
-
 
 def main():
     a = 0.045537                        # inner radius
     b = 0.277630                         # outer radius
     m = -10
     # kr = np.linspace(5,50,1000)
-    roots, re_roots, im_roots, F, f_cheb = kradial(m,a,b)
+    roots, re_roots, im_roots, F, f_cheb = fcn.kradial(m,a,b)
     print("radial wave numbers are: ", re_roots, '\n')
     k_array = np.linspace(5,100,5000)
     plt.plot(k_array, F(k_array, m, a, b), label = '$F$')
@@ -86,7 +65,7 @@ def main():
     plt.grid()
     plt.xlabel('$k$'); 
     M = 0.28993
-    kaxial = k_axial(M,re_roots)
+    kaxial = fcn.k_axial(M,re_roots)
     print("axial wavenumbers are: ", kaxial)
     plt.show()
 
