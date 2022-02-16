@@ -12,17 +12,14 @@ import sample.helpers as fcn
 
 
 def main():
-    a = 0.045537                        # inner radius
-    b = 0.277630                         # outer radius
+    a = 0.2                         # inner radius
+    b = 1                         # outer radius
     m = -10
     M = 0.28993
 
     roots, re_roots, im_roots, F, f_cheb = fcn.kradial(m,a,b)
 
     print("radial wave numbers are: ", re_roots, '\n')
-
-    kaxial = fcn.k_axial(M,re_roots)
-    print("axial wavenumbers are: ", kaxial)
 
     k_array = np.linspace(5,100,5000)
     plt.plot(k_array, F(k_array, m, a, b), label = '$F$')

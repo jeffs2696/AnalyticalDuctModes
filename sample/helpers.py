@@ -38,10 +38,13 @@ def kradial(m,a,b):
     F = lambda k,m,a,b :Jp(m,k*a)*Yp(m,k*b)-Jp(m,k*b)*Yp(m,k*a) 
 
 
-    f_cheb = pychebfun.Chebfun.from_function(lambda x: F(x, m, a, b), domain = (5,100))
+    f_cheb = pychebfun.Chebfun.from_function(lambda x: F(x, m, a, b), domain = (10,100))
+
+
     re_roots = f_cheb.roots().real
     im_roots = f_cheb.roots().imag
     roots = re_roots + im_roots*1j 
+    print(roots)
     return roots, re_roots, im_roots, F, f_cheb
 
 

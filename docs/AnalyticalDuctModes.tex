@@ -1,0 +1,545 @@
+%        File: AnalyticalDuctModes.tex
+%     Created: Fri Feb 11 10:00 PM 2022 E
+% Last Change: Fri Feb 11 10:00 PM 2022 E
+%
+\documentclass[a4paper]{report}
+\usepackage{mathtools}
+\begin{document}
+
+
+
+Starting with equation 2.28 (Wave Equation) in Kousen's paper,
+
+
+
+\begin{equation}
+    \frac{1}{A^2}\frac{D^2\tilde{p}}{Dt^2} -
+    \nabla^2 \tilde{p} =
+    2 \bar{\rho} \frac{d V_x}{d x} \frac{\partial  \tilde{v}_r}{ \partial x} 
+    \label{eqn:KousensWaveEquation}
+\end{equation}
+
+
+lets look at the no flow case. In the case of sheared flow, $dV_x/dx = 0$ the right hand side will be zero 
+
+
+
+\begin{align*}
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+        \vec{V}\cdot \vec {\nabla} (\tilde{p}) 
+    \right) -
+    \nabla^2
+    \tilde{p} &=
+    0 \\
+\end{align*}
+
+Substituting the definitions for $\nabla$ and $\nabla^2$ in cylindrical 
+coordinates gives,
+
+\begin{align*} 
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 \tilde{p}}{\partial t^2}
+    + 
+        \vec{V}\cdot \left(
+            \frac{\partial\tilde{p}}{\partial t} + 
+            \frac{1}{\tilde{r}}\frac{\partial \tilde{p} }{\partial \tilde{r}} +
+            \frac{\partial \tilde{p}}{\partial \theta} +
+            \frac{\partial \tilde{p}}{\partial x}  
+        \right)  \right)-
+        \left(
+            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial r} +
+            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
+            \frac{\partial^2 \tilde{p}}{\partial x^2} 
+        \right) &= 0  
+\end{align*} 
+Setting $\vec{V} = 0$,
+
+\begin{align*} 
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 \tilde{p}}{\partial t^2}
+    \right) - 
+        \left(
+            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial  r}  +
+            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
+            \frac{\partial^2 \tilde{p}}{\partial x^2} 
+        \right) &= 0  
+\end{align*} 
+Recall, $\tilde{p} = p/\bar{\rho} A^2$. To dimensionalize the equation, this is
+substituted and both sides are multiplied by $\bar{\rho}A^2$,
+
+
+\begin{align*} 
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 {p}}{\partial t^2}
+    \right) - 
+        \left(
+            \frac{\partial^2 {p}}{\partial t^2} + 
+            \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
+            \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
+            \frac{\partial^2 p}{\partial x^2} 
+        \right) &= 0  
+\end{align*} 
+
+The process of separation of variables(seperation indeterminatarum)
+was first written and formalized by John Bernoulli in a letter to Leibniz. The method
+of separation of variables requires an assumed solution as well as initial and boundary 
+conditions. For a partial differential equation, the assumed solution can be a 
+linear combination of solutions to a system of ordinary differential equations that
+comprises the partial differential equation. Since $p$ is a function of four
+variables, the solution is assumed to be a linear combination of four solutions.
+Each solution is assumed to be Euler's identity, a common ansant for linear partial 
+differential equations and boundary conditions.
+
+Defining,
+
+\begin{equation}
+    p(x,r,\theta,t) = X(x) R(r) \Theta(\theta) T(t)
+\end{equation}
+
+where, 
+
+\begin{align*}
+    X(x) &=
+    A_1 e^{ik_x x} +
+    B_1 e^{-ik_x x }\\
+    \Theta(\theta) &=
+    A_2 e^{i k_{\theta} \theta } +
+    B_2 e^{-ik_{\theta} \theta }\\
+    T(t) &=
+    A_3 e^{i \omega t } +
+    B_3 e^{-i\omega t  }
+\end{align*}
+
+The next step is to rewrite the wave equation in terms of $X$, $R$, $\Theta$,
+and $T$. To further simplify the result, each term is divided by $p$.
+Before the substitution, the derivatives of the assumed solutions need to be
+evaluated.
+
+
+\subsubsection{Temporal Derivatives}
+
+\begin{align*}
+    \frac{\partial p}{\partial t} 
+    &=
+    \frac{\partial }{\partial t}  \left( XR\Theta T \right) \\
+    &=
+    XR\Theta\frac{\partial T}{\partial t}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial p}{\partial t} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial T}{\partial t} \right) \\
+    &=\frac{ 1}{ T}\frac{\partial T}{\partial t}  
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 p}{\partial t^2} 
+    &=
+    \frac{\partial^2 }{\partial t^2}  \left( XR\Theta T \right) \\
+    &=
+    XR\Theta\frac{\partial^2 T}{\partial t^2}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial^2 p}{\partial t^2} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial^2 T}{\partial t^2} \right) \\
+    &=\frac{ 1}{ T}\frac{\partial^2 T}{\partial t^2}  
+\end{align*}
+
+\begin{align*}
+    \frac{\partial T}{\partial t} &=
+    \frac{\partial}{\partial t}
+        \left( 
+        A_3 e^{i \omega t} + B_3 e^{-i \omega t}
+    \right)  \\
+    &=
+    \frac{\partial}{\partial t} \left(A_3 e^{i \omega t}  \right) +
+    \frac{\partial}{\partial t} \left(B_3 e^{-i \omega t}  \right)\\ 
+    &= i \omega A_3 e^{i \omega t} - i \omega B_3 e^{i \omega t} 
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 T}{\partial t^2} &=
+    \frac{\partial^2}{\partial t^2}
+        \left( 
+        i \omega A_3 e^{i \omega t} + i \omega B_3 e^{-i \omega t}
+    \right)  \\
+    &=
+    \frac{\partial^2}{\partial t^2} \left(i \omega A_3 e^{i \omega t}  \right) +
+    \frac{\partial^2}{\partial t^2} \left(- i \omega B_3 e^{-i \omega t}  \right)\\ 
+    &= (i \omega)^2 A_3 e^{i \omega t} - (i \omega)^2 B_3 e^{i \omega t} 
+\end{align*}
+
+\begin{align*}
+    \frac{1}{T}\frac{\partial^2 T}{\partial t^2} 
+    &=
+    (i\omega)^2 \\
+    &= -\omega^2
+\end{align*}
+
+
+\subsubsection{Radial Derivatives}
+\begin{align*}
+    \frac{\partial p}{\partial r} 
+    &=
+    \frac{\partial }{\partial r}  \left( XR\Theta T \right) \\
+    &=
+    X\Theta T\frac{\partial R}{\partial r}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial p}{\partial r} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( X\Theta T\frac{\partial R}{\partial r} \right) \\
+    &=\frac{ 1}{ R}\frac{\partial R}{\partial r}  
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 p}{\partial r^2} 
+    &=
+    \frac{\partial^2 }{\partial r^2}  \left( XR\Theta T \right) \\
+    &=
+    X\Theta T\frac{\partial^2 R}{\partial r^2}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial^2 p}{\partial r^2} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( X\Theta T \frac{\partial^2 R}{\partial r^2} \right) \\
+    &=\frac{ 1}{ R}\frac{\partial^2 R}{\partial r^2}  
+\end{align*}
+The radial derivatives will be revisited once the remaining derivatives are evaluated,
+
+\subsubsection{Tangential Derivatives}
+
+\begin{align*}
+    \frac{\partial p}{\partial \theta } 
+    &=
+    \frac{\partial }{\partial t}  \left( XR\Theta T \right) \\
+    &=
+    XRT\frac{\partial \Theta}{\partial \theta}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial p}{\partial \theta} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial T}{\partial \theta} \right) \\
+    &=\frac{ 1}{ \Theta}\frac{\partial \Theta}{\partial \theta}  
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 p}{\partial \theta^2} 
+    &=
+    \frac{\partial^2 }{\partial \theta^2}  \left( XR\Theta T \right) \\
+    &=
+    XRT\frac{\partial^2 \Theta }{\partial \theta^2}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial^2 p}{\partial \theta^2} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( XRT\frac{\partial^2 \Theta}{\partial \theta^2} \right) \\
+    &=\frac{ 1}{ \Theta}\frac{\partial^2 \Theta}{\partial \theta^2}  
+\end{align*}
+
+\begin{align*}
+    \frac{\partial \Theta}{\partial \theta} &=
+    \frac{\partial}{\partial \theta}
+        \left( 
+            A_2 e^{i k_{\theta} \theta} + B_2 e^{-i k_{\theta} \theta}
+        \right)  \\
+    &=
+    \frac{\partial}{\partial \theta} \left(A_2 e^{i k_{\theta} \theta}  \right) +
+    \frac{\partial}{\partial \theta} \left(B_2 e^{-i k_{\theta} \theta}  \right)\\ 
+    &= i k_{\theta} A_2 e^{i k_{\theta} \theta} - i k_{\theta} B_2 e^{i k_{\theta} \theta} 
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 \Theta }{\partial \theta^2} &=
+    \frac{\partial^2}{\partial \theta^2}
+        \left( 
+        i k_{\theta} A_2 e^{i k_{\theta} \theta} - i k_{\theta} B_2 e^{i k_{\theta} \theta} 
+    \right)  \\
+    &=
+    \frac{\partial^2}{\partial \theta^2} \left(i k_{\theta} A_2 e^{i k_{\theta} \theta}  \right) +
+    \frac{\partial^2}{\partial \theta^2} \left(- i k_{\theta} B_2 e^{-i k_{\theta} \theta}  \right)\\ 
+    &= (i k_{\theta})^2 A_2 e^{i k_{\theta} \theta } - (i k_{\theta})^2 B_2 e^{i k_{\theta} \theta} 
+\end{align*}
+
+\begin{align*}
+    \frac{1}{\Theta}\frac{\partial^2 \Theta}{\partial \theta^2} 
+    &=
+    (ik_{\theta})^2 \\
+    &= -k_{\theta}^2
+\end{align*}
+
+\subsubsection{Axial Derivatives}
+
+\begin{align*}
+    \frac{\partial p}{\partial x} 
+    &=
+    \frac{\partial }{\partial x}  \left( XR\Theta T \right) \\
+    &=
+    R\Theta T \frac{\partial X}{\partial x}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial p}{\partial x} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( R\Theta\frac{\partial X}{\partial x} \right) \\
+    &=\frac{ 1}{ X}\frac{\partial X}{\partial x}  
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 p}{\partial x^2} 
+    &=
+    \frac{\partial^2 }{\partial x^2}  \left( XR\Theta T \right) \\
+    &=
+    R\Theta T \frac{\partial^2 X}{\partial x^2}  
+\end{align*}
+
+
+\begin{align*}
+    \frac{1}{p}\frac{\partial^2 p}{\partial x^2} 
+    &=
+    \frac{ 1}{X R \Theta T}  \left( R\Theta T \frac{\partial^2 X}{\partial x^2} \right) \\
+    &=\frac{ 1}{ X}\frac{\partial^2 X}{\partial x^2}  
+\end{align*}
+
+\begin{align*}
+    \frac{\partial X}{\partial x} &=
+    \frac{\partial}{\partial t}
+        \left( 
+        A_3 e^{i k_x t} + B_3 e^{-i \omega t}
+    \right)  \\
+    &=
+    \frac{\partial}{\partial t} \left(A_1 e^{i k_x x}  \right) +
+    \frac{\partial}{\partial t} \left(B_1 e^{-i k_x x }  \right)\\ 
+    &= i k_x A_1 e^{i k_x x } - i k_x B_1 e^{i k_x x} 
+\end{align*}
+
+\begin{align*}
+    \frac{\partial^2 X}{\partial x^2} &=
+    \frac{\partial^2}{\partial x^2}
+        \left( 
+        i k_x A_1 e^{i k_x x} + i k_x B_1 e^{-i k_x x}
+    \right)  \\
+    &=
+    \frac{\partial^2}{\partial x^2} \left(i k_x A_1 e^{i k_x x}  \right) +
+    \frac{\partial^2}{\partial x^2} \left(- i k_x B_1 e^{-i k_x x}  \right)\\ 
+    &= (i k_x)^2 A_1 e^{i k_x x} - (i k_x)^2 B_1 e^{i k_x x} 
+\end{align*}
+
+\begin{align*}
+    \frac{1}{X}\frac{\partial^2 X}{\partial x^2} 
+    &=
+    (i k_x)^2 \\
+    &= -k_x^2
+\end{align*}
+
+Substituting this back into the wave equation yields ,
+
+
+
+\begin{align*} 
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 {p}}{\partial t^2}
+    \right) &= 
+        \left(
+            \frac{\partial^2 {p}}{\partial t^2} + 
+            \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
+            \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
+            \frac{\partial^2 p}{\partial x^2} 
+        \right) 
+\end{align*} 
+
+\begin{equation}
+    \frac{1}{A^2} \frac{1}{T}\frac{\partial^2 T}{\partial t^2} = 
+    \frac{1}{R}\frac{\partial^2 R}{\partial r^2 } +
+    \frac{1}{r}\frac{1}{R}\frac{\partial R}{\partial r}  + 
+    \frac{1}{r^2}\frac{1}{\Theta}\frac{\partial \Theta}{\partial \theta} + 
+    \frac{1}{X}\frac{\partial^2 X}{\partial x^2}
+    \label{eqn:waveode}
+\end{equation}
+
+Notice that each term is only a function of its associated independent variable.
+So, if we vary the time, only the term on the left-hand side can vary. However,
+since none of the terms on the right-hand side depend on time, that means the
+right-hand side cannot vary, which means that the ratio of time with its second
+derivative is independent of time. The practical upshot is that each of these 
+terms is constant, which has been shown. The wave numbers are the \textit{separation constants} 
+that allow the PDE to be split into four separate ODE's. Substituting the separation constants 
+into Equation (\ref{eqn:waveode}) gives, 
+
+
+\begin{equation}
+    -\frac{\omega^2}{A^2}  = 
+    \frac{1}{R}
+    \left(      
+    \frac{\partial^2 R}{\partial r^2 } +
+    \frac{1}{r}\frac{\partial R}{\partial r}  
+\right) -
+    \frac{k_{\theta}^2}{r^2}-  
+    k_x^2
+    \label{eqn:waveode2}
+\end{equation}
+Note that the dispersion relation states $\omega = k A$
+
+\begin{equation}
+    \frac{1}{R}
+    \left(      
+    \frac{\partial^2 R}{\partial r^2 } +
+    \frac{1}{r}\frac{\partial R}{\partial r}  
+\right) -
+    \frac{k_{\theta}^2}{r^2}-  
+    k_x^2 + k^2 = 0
+    \label{eqn:waveode3}
+\end{equation}
+The remaining terms are manipulated to follow the same form as \textit{Bessel's Differntial 
+Equation} ,
+
+\begin{equation}
+    x^2 \frac{d^2 y}{dx^2} + x \frac{dy }{dx } + (x^2 - n^2) y = 0
+    \label{eqn:besselODE}
+\end{equation}
+
+The general solution to Bessel's differential equation is a linear combination of
+the Bessel functions of the first kind, $J_n(x)$ and of the second kind, $Y_n(x)$ 
+\cite{wolphram:bessel}. The subscript $n$ refers to the order of Bessel's equation.
+
+\begin{equation}
+    y(x) = AJ_n(x) + BY_n(x)
+    \label{eqn:besselsolution}
+\end{equation}
+
+By rearranging Equation (\ref{eqn:waveode3}), a comparison can be made to Equation
+(\ref{eqn:besselODE}) to show that the two equations are of the same form. 
+
+The first step is to revisit the radial derivatives that have not been addressed.
+As was done for the other derivative terms, the radial derivatives will also 
+be set equal to a separation constant, $-k_r^2$. 
+
+\begin{align}
+    \underbrace{\frac{1}{R}
+    \left(      
+    \frac{\partial^2 R}{\partial r^2 } +
+    \frac{1}{r}\frac{\partial R}{\partial r}  
+\right) -
+    \frac{k_{\theta}^2}{r^2}}_{-k_r^2}-  
+    k_x^2 + k^2 = 0
+    \label{eqn:wavenumber_without_kr}
+\end{align}
+
+The reader may be curious as to why the tangential separation constant $k_{\theta}$ is 
+included within the definition of the radial separation constant. 
+
+Recall the ODE for the tangential direction, 
+
+\begin{align*}
+    \frac{\partial \Theta}{\partial \theta} \frac{1}{\Theta} = - k_{\theta}^2\\
+    \frac{\partial \Theta}{\partial \theta} \frac{1}{\Theta} + \Theta k_{\theta}^2 = 0 
+\end{align*}
+
+where the solution is more or less,
+
+\begin{align*}
+    \Theta(\theta) = e^{i k_{\theta} \theta}
+\end{align*}
+
+In order to have non trivial, sensible solutions, the value of $\Theta(0)$ and
+$\Theta(2\pi)$ need to be the same, and this needs to be true for any multiple 
+of $2\pi$ for a fixed r. Taking $\Theta$ to be one, a unit circle, it can be shown that the domain
+is only going to be an integer multiple. Therefore, there is an implied periodic
+azimuthal boundary condition, i.e. $0<\theta\leq 2 \pi$ and $k_{\theta}=m$. 
+
+Continuing with the radial derivatives\ldots
+
+
+\begin{align*}
+    -k_r^2 =\frac{1}{R}
+    \left(      
+    \frac{\partial^2 R}{\partial r^2 } +
+    \frac{1}{r}\frac{\partial R}{\partial r}  
+\right) -
+    \frac{m^2}{r^2} 
+\end{align*}
+To further simplify, the chain rule is used to do a change of variables, $x = k_r r$
+\begin{align*}
+    \frac{\partial R}{\partial r} &= \frac{dR}{dx}\frac{dx}{dr}\\
+    &=
+    \frac{dR}{dx}\frac{d}{dr}\left( k_r r \right) \\
+    &=
+    \frac{dR}{dx} k_r 
+\end{align*} 
+
+
+\begin{align*}
+    \frac{\partial^2 R}{\partial r^2} &= \frac{d^2R}{dx^2}\left(\frac{dx}{dr}\right)^2 + 
+    \frac{dR}{dr}\frac{d^2x}{dr^2}\\
+    &=
+    \frac{d^2R}{dx^2}\frac{d}{dr} k_r^2 + k_r \frac{d^2r}{dr^2}\\
+    &=
+    \frac{d^2R}{dx^2}\frac{d}{dr} k_r^2
+\end{align*} 
+
+Substituting this into Equation (\ref{eqn:waveode3}),
+\begin{equation}
+    \left(\frac{d^2R}{dx^2}k_r^2 +
+    \frac{1}{r}\frac{d^2R}{dx^2}k_r\right) +
+    \left(k_r^2 - \frac{m^2}{r^2}\right)R
+    \label{eqn:waveode4}
+\end{equation}
+Dividing Equation \ref{eqn:waveode4} by $k_r^2$,
+
+\begin{equation}
+    \left(\frac{d^2R}{dx^2} +
+    \frac{1}{k_r r}\frac{d^2R}{dx^2}\right) +
+    \left(1  - \frac{m^2}{k_r^2 r^2}\right)R
+    \label{eqn:waveode5}
+\end{equation}
+
+\begin{equation}
+    \left(\frac{d^2R}{dx^2} +
+    \frac{1}{x^2}\frac{d^2R}{dx^2}\right) +
+    \left(1  - \frac{m^2}{x^2}\right)R
+    \label{eqn:waveode6}
+\end{equation}
+
+Multiplying Equation (\ref{eqn:waveode6}) by $x^2$ gives,
+
+\begin{equation}
+    \frac{d^2R}{dr^2}x^2 + 
+    \frac{dR}{dr}x + 
+    \left( x^2 - m^2 \right)R
+    \label{eqn:finalradialode}
+\end{equation}
+which matches the form of Bessel's equation
+
+In summary, the wave equation for no flow in a hollow duct with hard walls is obtained 
+from Equation (\ref{eqn:wavenumber_without_kr}).
+\begin{equation}
+    k^2 = k_r^2 + k_x^2
+    \label{eqn:wavenumber_equation}
+\end{equation}
+
+\subsubsection{Hard Wall boundary condition}
+\begin{equation}
+    \frac{\partial P}{\partial r} = \frac{\partial}{\partial r} \left( X\Theta T R \right)
+\end{equation}
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
+
+
