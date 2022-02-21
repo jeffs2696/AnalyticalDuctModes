@@ -6,8 +6,6 @@
 \usepackage{mathtools}
 \begin{document}
 
-\section{No Flow}
-
 
 
 Starting with equation 2.28 (Wave Equation) in Kousen's paper,
@@ -529,48 +527,6 @@ Multiplying Equation (\ref{eqn:waveode6}) by $x^2$ gives,
 \end{equation}
 which matches the form of Bessel's equation
 
-Therefore, the solution goes from this,
-\begin{equation}
-    y(x) = AJ_n(x) + BY_n(x)
-    \label{eqn:besselsolution}
-\end{equation}
-to this,
-
-
-\begin{equation}
-    R(r) = (AJ_n(k_r r) + BY_n(k_r r)) 
-    \label{eqn:besselsolution}
-\end{equation}
-where the coefficients $A$ and $B$ are found after applying radial
-boundary conditions. %and there is an exponential dependence. 
-
-
-
-
-\subsubsection{Hard Wall boundary condition}
-\begin{align*}
-    \frac{\partial p}{\partial r}|_{r = r_{min}}  =\frac{\partial p}{\partial r}|_{r = r_{max}} = 0 \rightarrow 
-    \frac{\partial}{\partial r} \left( X\Theta T R \right) &= 0 \\
-    X \Theta T\frac{\partial R}{\partial r}  &= 0 \\
-    \frac{\partial R}{\partial r}  &= 0 
-\end{align*}
-
-where,
-
-
-\begin{align*} 
-    \frac{ \partial R}{\partial r}|_{r_{min}} &= AJ_n'(k_r r_{min}) + B Y_n' (k_r r_{min}) = 0 
-    \rightarrow B = -A \frac{J_n'(k_r r_{min})}{Y_n'(k_r r_{min})}
-\end{align*}
-
-
-\begin{align*} 
-    \frac{ \partial R}{\partial r} &= AJ_n'(k_r r_{max}) + B Y_n' (k_r r_{max}) = 0 \\
-                                   &= AJ_n'(k_r r_{max}) - A\frac{J_n' (k_r r_{min})}{Y_n'(k_r r_{min})} Y_n' (k_r r_{max}) = 0 \\
-                                   &= \frac{J_n'(k_r r_{min})}{J_n' (k_r r_{max})} - \frac{Y_n'(k_r r_{min})}{Y_n' (k_r r_{max})} = 0 
-\end{align*}
-where $k_r r$ are the zero crossings for the derivatives of the Bessel functions of the first and second kind.
-
 In summary, the wave equation for no flow in a hollow duct with hard walls is obtained 
 from Equation (\ref{eqn:wavenumber_without_kr}).
 \begin{equation}
@@ -578,9 +534,12 @@ from Equation (\ref{eqn:wavenumber_without_kr}).
     \label{eqn:wavenumber_equation}
 \end{equation}
 
+\subsubsection{Hard Wall boundary condition}
+\begin{equation}
+    \frac{\partial P}{\partial r} = \frac{\partial}{\partial r} \left( X\Theta T R \right)
+\end{equation}
 
-Solving for the axial wavenumber gives,
-\section{Uniform Flow}
+\section{}
 
 To get the same equation but for uniform flow, the same procedure can be followed.
 
@@ -676,7 +635,7 @@ Expanding the last term and substituting $\omega/A = k$
     \frac{d p}{d r} r_T - 
     \frac{m^2}{r^2}r_T^2 p - k_x^2r_T^2  p\right]
     +\left( r_T^2\left(
-        k^2 - 2 k k_x M_x + k_x^2 M_x^2 \right)
+        k^2 - 2 k k_x M_x - k_x^2 M_x^2 \right)
     \right)p 
 \end{align*}
 Canceling out $r_T/\bar{\rho}A$ in every term
@@ -686,17 +645,14 @@ Canceling out $r_T/\bar{\rho}A$ in every term
     \frac{ d^2 p}{d r} +
     \frac{1}{r} 
     \frac{d p}{d r} + \left[ 
-    k^2 - 2 k k_x M_x + k_x^2 M_x^2- \frac{m^2}{r^2}  - k_x^2\right]p 
+    k^2 - 2 k k_x M_x - k_x^2 M_x^2- \frac{m^2}{r^2}  - k_x^2\right]p 
 \end{align*}
-
-Continue here,
-
 
 Defining 
 
-$$- N^2 = k_x^2 M_x^2 - 2 k k_x M_x - k_x^2 $$
+$$-N^2 = k_x^2 M_x^2 - 2 k k_x M_x - k_x^2 $$
 $$-N^2 = -(1 -  M_x^2)k_x^2 - 2 k k_x M_x  $$
-$$-N^2 =  -\beta^2 k_x^2 - 2 k k_x M_x  $$
+$$-N^2 = - \beta^2 k_x^2 - 2 k k_x M_x  $$
 
 
 \begin{align*}
@@ -721,7 +677,7 @@ Looking at the radial wavenumber,
 \begin{align*}
     k_r^2 &= k^2 - N^2 \\
           &= k^2-\beta^2 k_x^2 - 2 k k_x M_x \\
-    0 &=  -\beta ^2 k_x ^2 -  \left( 2M_x k \right)k_x +(k^2 - k_r^2)
+    0 &= - \beta ^2 k_x ^2 - \left( 2M_x k \right)k_x +(k^2 - k_r^2)
 \end{align*}
 
 Where the roots to this equation are the axial wavenumber,
@@ -730,37 +686,8 @@ Where the roots to this equation are the axial wavenumber,
 Applying the quadratic formula and taking 
 
 \begin{align*}
-    A &= - \beta^2 \\
-    B &= - 2M_x k\\
-    C &= k^2 - k_2^2
-\end{align*} 
-
-Note B is negative when $M_x$ is positive,
-
-(I feel like N should change based on $M_x's$ sign)
-
-\begin{align*}
-    k_x &= \frac{2M_x k \pm \sqrt{4 M_x^2 k^2 + 4 \beta^2 \left( k^2 - k_r^2 \right)}}{-2\beta^2}\\
-        &= \frac{-M_x k \pm \sqrt{k^2 - k_r^2}}{\beta^2}
-\end{align*}
-
-\section{Annular Duct Axial Wavenumber solution}
-
-
-
-This needs to be proven,
-
-
-In \cite{Amr2001}, the axial wavenumber for annular ducts is reported,
-
-\begin{equation*}
-    \frac{-(\omega - m M_{\theta})M_x \pm \sqrt{\left( \omega - m M_{\theta}^2 \right) - \beta\left( m^2 + \Gamma_{m,n} ^2 \right)}}{beta^2}
-\end{equation*}
-
-where 
-
-$\Gamma_{m,n}= \frac{n^2 \pi^2}{\left( r_{max} - r_{min} \right)^2}$
-
+    <+content+>
+\end{align*}<++>
 \bibliographystyle{plain}
 \bibliography{references}
 \end{document}
