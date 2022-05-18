@@ -48,13 +48,14 @@ def kradial(m,a,b):
     return roots, re_roots, im_roots, F, f_cheb
 
 
-def k_axial(M, krad):
-    freq = 5726.6
+def k_axial(M, krad,k_wave):
+    freq = 726.6
     omega = 2*np.pi*freq                      # angular frequency
     c0 = 343.15                          # speed of sound
     # rho0 = 1.225                        # density
     k_wave = omega/c0               # wave number
     beta = 1-M**2
     kaxial = (-M*k_wave + np.sqrt(k_wave**2 - beta*krad**2)) / beta**2 
+    print(k_wave,kaxial)
     return kaxial
 

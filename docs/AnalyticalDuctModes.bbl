@@ -1,8 +1,14 @@
 \begin{thebibliography}{1}
 
-\bibitem{wolphram:bessel}
-Eric~W. Weisstein.
-\newblock "bessel differential equation." from mathworld--a wolfram web
-  resource.
+\bibitem{Kousen1999}
+K.~A. Kousen, ``Eigenmodes of ducted flows with radially-dependent axial and
+  swirl velocity components,'' 1999.
+
+\bibitem{Kerrebrock1992}
+J.~L. Kerrebrock, {\em Aircraft engines and gas turbines}.
+\newblock MIT Press, 1992.
+
+\bibitem{Amr2001}
+A.~A. Amr, ``Aeroacoustics and stability of swirling flows,''
 
 \end{thebibliography}

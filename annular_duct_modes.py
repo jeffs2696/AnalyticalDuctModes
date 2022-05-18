@@ -12,24 +12,25 @@ import sample.helpers as fcn
 
 
 def main():
-    a = 0.2                         # inner radius
-    b = 1                         # outer radius
-    m = -10
-    M = 0.28993
+    r_min = 0.2                         # inner radius
+    r_max = 1                         # outer radius
+    m = 2 
+    M = 0.5
 
-    roots, re_roots, im_roots, F, f_cheb = fcn.kradial(m,a,b)
+    roots, re_roots, im_roots, F, f_cheb = fcn.kradial(m,r_min,r_max)
 
     print("radial wave numbers are: ", re_roots, '\n')
 
     k_array = np.linspace(5,100,5000)
-    plt.plot(k_array, F(k_array, m, a, b), label = '$F$')
-    plt.plot(f_cheb.roots(), F(f_cheb.roots(), m, a, b), 'o', label = 'roots')
+    plt.plot(k_array, F(k_array, m, r_min, r_max), label = '$F$')
+    plt.plot(f_cheb.roots(), F(f_cheb.roots(), m, r_min, r_max), 'o', label = 'roots')
     plt.ylim(ymin=-1000.0, ymax = 1000)
     plt.legend()
     plt.grid()
     plt.xlabel('$k$'); 
     plt.show()
 
+    fcn.k_axial(M,k_array[0],k_wave = -1)
 
 
 

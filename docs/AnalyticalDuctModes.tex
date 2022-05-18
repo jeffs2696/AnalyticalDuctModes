@@ -2,29 +2,171 @@
 %     Created: Fri Feb 11 10:00 PM 2022 E
 % Last Change: Fri Feb 11 10:00 PM 2022 E
 %
-\documentclass[a4paper]{report}
+\documentclass[a4paper]{article}
 \usepackage{mathtools}
 \begin{document}
+This paper outlines the mathematical model that describes sound propagation 
+within a duct. This is commonly used as the starting basis for predicting 
+turbomachinery duct noise. The goal of this document is check equation (4.1) 
+in Kousen's work \cite{Kousen1999} which was obtained from \cite{Kerrebrock1992}.
+First, we will derive the analytical solution to the wave equation obtained 
+from the linearized Euler equations. This will provide a useful background by
+showing why the Bessel's Function's zero crossing is needed to determine the 
+solution. Spolier, it is because the wave equation can be simplified to be
+of the same form as Bessel's (Differential) Equation. 
 
-\section{No Flow}
+\section{}
+
+The equation presented in Kousen's work
+
+\begin{equation}
+    \gamma_{acoustic} = 
+    - \frac{k M_x}{1 - M_x^2} \pm 
+    \frac{1}{1-M_x^2} 
+    \sqrt{k^2 + (M_x^2-1) \kappa_{m \mu}^2}
+    \label{eqn:4_1}
+\end{equation}
+
+where $\kappa _{m \mu}$ is a ``separation constant for the $m^{th}$ 
+circumferential and $\mu^{th}$ radial mode in the solution of the convected 
+wave equation.
+
+It is not clear where to find the values of separation constants needed to 
+calculate the analytical solution for a uniform flow. In order to check 
+this work, this should be further documented. Although values of $\kappa$ are 
+not listed in Kousen's paper \cite{Kousen1999}, the reference [44] in \cite{Kousen1999}
+(\cite{Kerrebrock1992}), defines the separation constant as $\mu $
+
+The pressure fluctuations are governed by the wave equation derived from the
+radial linearized euler equation,
 
 
 
-Starting with equation 2.28 (Wave Equation) in Kousen's paper,
+\begin{align*} 
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 \tilde{p}}{\partial t^2}
+    + 
+        \vec{V}\cdot \left(
+            \frac{\partial\tilde{p}}{\partial t} + 
+            \frac{1}{\tilde{r}}\frac{\partial \tilde{p} }{\partial \tilde{r}} +
+            \frac{\partial \tilde{p}}{\partial \theta} +
+            \frac{\partial \tilde{p}}{\partial x}  
+        \right)  \right)-
+        \left(
+            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial r} +
+            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
+            \frac{\partial^2 \tilde{p}}{\partial x^2} 
+        \right) &= 0  
+\end{align*} 
+
+If we assume that the pressure fluctuation is 
+
+
+\begin{equation}
+    \tilde{p}(x,r,\theta,t) = X(x) R(r) \Theta(\theta) T(t)
+\end{equation}
+
+where, 
+
+\begin{align*}
+    X(x) &=
+    A_1 e^{ik_x x} +
+    B_1 e^{-ik_x x }\\
+    \Theta(\theta) &=
+    A_2 e^{i k_{\theta} \theta } +
+    B_2 e^{-ik_{\theta} \theta }\\
+    T(t) &=
+    A_3 e^{i \omega t } +
+    B_3 e^{-i\omega t  }
+\end{align*}
+
+Then the radial dependence is governed by,
+
+
+\begin{align*}
+    \frac{ d^2 \tilde{p}}{d r} +
+    \frac{1}{r} 
+    \frac{d \tilde{p}}{d r} + \left[ 
+    k^2 - 2 k k_x M_x + k_x^2 M_x^2- \frac{m^2}{r^2}  - k_x^2\right]\tilde{p}
+\end{align*}
+
+Applying algebraic jujitsu, this can be simplified, let's define a new variable,
+$N$
+
+$$- N^2 = k_x^2 M_x^2 - 2 k k_x M_x - k_x^2 $$
+$$-N^2 = -(1 -  M_x^2)k_x^2 - 2 k k_x M_x  $$
+
+
+\begin{align*}
+    \frac{ d^2 p}{d r} +
+    \frac{1}{r} 
+    \frac{d p}{d r} + \left[ 
+    k^2 - N^2 - \frac{m^2}{r^2}  \right]p 
+\end{align*}
+
+Let $k_r^2 = k^2 - N^2$
+
+
+\begin{align*}
+    \frac{ d^2 p}{d r} +
+    \frac{1}{r} 
+    \frac{d p}{d r} + \left[ 
+    k_r^2  - \frac{m^2}{r^2}  \right]p = 0
+\end{align*}
+
+Looking at the radial wavenumber,
+
+\begin{align*}
+    k_r^2 &= k^2 - N^2 \\
+          &= k^2-(1 - M^2)^2 k_x^2 - 2 k k_x M_x \\
+    0 &=  -(1 - M^2) ^2 k_x ^2 -  \left( 2M_x k \right)k_x +(k^2 - k_r^2)
+\end{align*}
+
+Where the roots to this equation are the axial wavenumber, which matches
+the definition of the constant $\mu$,
+
+\begin{equation}
+    (\mu )^2 = -(1 - M^2) k^2 - 2 M \omega k / A_T + \left( \omega/A_T \right)^2
+    \label{<+label+>}
+\end{equation}
+
+
+
+Applying the quadratic formula and taking 
+
+\begin{align*}
+    A &= - \beta^2 \\
+    B &= - 2M_x k\\
+    C &= k^2 - k_2^2
+\end{align*} 
+
+Note B is negative when $M_x$ is positive,
+
+(I feel like N should change based on $M_x's$ sign)
+
+\begin{align*}
+    k_x &= \frac{2M_x k \pm \sqrt{4 M_x^2 k^2 + 4 \beta^2 \left( k^2 - k_r^2 \right)}}{-2\beta^2}\\
+        &= \frac{-M_x k \pm \sqrt{k^2 - k_r^2}}{\beta^2}
+\end{align*}
+\section{Unsteady Flow}
+
+
+
+
+
+Starting with equation 2.28 (Wave Equation) in Kousen's paper \cite{Kousen1999},
 
 
 
 \begin{equation}
     \frac{1}{A^2}\frac{D^2\tilde{p}}{Dt^2} -
     \nabla^2 \tilde{p} =
-    2 \bar{\rho} \frac{d V_x}{d x} \frac{\partial  \tilde{v}_r}{ \partial x} 
+    2 \bar{\rho} \frac{d V_x}{d r} \frac{\partial  \tilde{v}_r}{ \partial x} 
     \label{eqn:KousensWaveEquation}
 \end{equation}
 
-
-lets look at the no flow case. In the case of sheared flow, $dV_x/dx = 0$ the right hand side will be zero 
-
-
+If there is uniform axial flow (or no flow), $dV_x/dr = 0$,
 
 \begin{align*}
     \frac{1}{A^2}\left(
@@ -56,7 +198,8 @@ coordinates gives,
             \frac{\partial^2 \tilde{p}}{\partial x^2} 
         \right) &= 0  
 \end{align*} 
-Setting $\vec{V} = 0$,
+
+For no flow, $\vec{V} = 0$, therefore,
 
 \begin{align*} 
     \frac{1}{A^2}\left(
@@ -69,8 +212,10 @@ Setting $\vec{V} = 0$,
             \frac{\partial^2 \tilde{p}}{\partial x^2} 
         \right) &= 0  
 \end{align*} 
-Recall, $\tilde{p} = p/\bar{\rho} A^2$. To dimensionalize the equation, this is
-substituted and both sides are multiplied by $\bar{\rho}A^2$,
+
+Using the isentropic relation, $\tilde{p} = p/\bar{\rho} A^2$. 
+To dimensionalize the equation, this relation is substituted and both sides 
+are multiplied by $\bar{\rho}A^2$,
 
 
 \begin{align*} 
@@ -84,18 +229,15 @@ substituted and both sides are multiplied by $\bar{\rho}A^2$,
             \frac{\partial^2 p}{\partial x^2} 
         \right) &= 0  
 \end{align*} 
-
-The process of separation of variables(seperation indeterminatarum)
-was first written and formalized by John Bernoulli in a letter to Leibniz. The method
+\section{Analytical Solution}
+The process of separation of variables(seperation indeterminatarum) was first written and formalized by John Bernoulli in a letter to Leibniz. The method
 of separation of variables requires an assumed solution as well as initial and boundary 
 conditions. For a partial differential equation, the assumed solution can be a 
 linear combination of solutions to a system of ordinary differential equations that
 comprises the partial differential equation. Since $p$ is a function of four
 variables, the solution is assumed to be a linear combination of four solutions.
 Each solution is assumed to be Euler's identity, a common ansant for linear partial 
-differential equations and boundary conditions.
-
-Defining,
+differential equations and boundary conditions.  The pressure field can be assumed to be,
 
 \begin{equation}
     p(x,r,\theta,t) = X(x) R(r) \Theta(\theta) T(t)
@@ -120,8 +262,11 @@ and $T$. To further simplify the result, each term is divided by $p$.
 Before the substitution, the derivatives of the assumed solutions need to be
 evaluated.
 
-
+\subsection{Evaluating the derivatives}
+By looking at each derivative individually, the process will be clearer to 
+follow,
 \subsubsection{Temporal Derivatives}
+
 
 \begin{align*}
     \frac{\partial p}{\partial t} 
@@ -130,7 +275,6 @@ evaluated.
     &=
     XR\Theta\frac{\partial T}{\partial t}  
 \end{align*}
-
 
 \begin{align*}
     \frac{1}{p}\frac{\partial p}{\partial t} 
@@ -146,7 +290,6 @@ evaluated.
     &=
     XR\Theta\frac{\partial^2 T}{\partial t^2}  
 \end{align*}
-
 
 \begin{align*}
     \frac{1}{p}\frac{\partial^2 p}{\partial t^2} 
@@ -353,8 +496,6 @@ The radial derivatives will be revisited once the remaining derivatives are eval
 
 Substituting this back into the wave equation yields ,
 
-
-
 \begin{align*} 
     \frac{1}{A^2}\left(
         \frac{\partial^2 {p}}{\partial t^2}
@@ -419,7 +560,7 @@ Equation} ,
 
 The general solution to Bessel's differential equation is a linear combination of
 the Bessel functions of the first kind, $J_n(x)$ and of the second kind, $Y_n(x)$ 
-\cite{wolphram:bessel}. The subscript $n$ refers to the order of Bessel's equation.
+. The subscript $n$ refers to the order of Bessel's equation.
 
 \begin{equation}
     y(x) = AJ_n(x) + BY_n(x)
@@ -761,8 +902,8 @@ where
 
 $\Gamma_{m,n}= \frac{n^2 \pi^2}{\left( r_{max} - r_{min} \right)^2}$
 
-\bibliographystyle{plain}
-\bibliography{references}
+\bibliographystyle{ieeetr}
+\bibliography{references.bib}
 \end{document}
 
 
