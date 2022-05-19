@@ -150,6 +150,44 @@ Note B is negative when $M_x$ is positive,
         &= \frac{-M_x k \pm \sqrt{k^2 - k_r^2}}{\beta^2}
 \end{align*}
 \section{Unsteady Flow}
+The linearized Euler equations (LEE) for mean axial shear and swirling flow 
+in cylindrical coordinates are 
+
+
+
+We can rearrange the equations to reflect Equations 2.33-2.36. Note that the momentum equation in the $\theta$ and $x$ directions remain unchanged. The term $ \frac{\partial(rv_r')}{\partial r}  = \frac{\partial (r)}{\partial r}v_r' + \frac{\partial v_r'}{\partial r} r$ in the Energy equation
+\begin{align*}
+\frac{1}{\bar{\rho} A^2}\left(
+\frac{\partial p'}{\partial t} +
+\frac{V_{\theta}}{r}
+\frac{\partial p'}{\partial \theta} + 
+V_x
+\frac{\partial p'}{\partial x}
+\right) +
+\frac{V_{\theta}^2}{A^2 r}v_r'+
+\frac{\partial v_r'}{\partial r} + \frac{v_r'}{r} +
+\frac{1}{r}
+\frac{\partial v_{\theta}'}{\partial \theta}		 
+ +
+\frac{\partial v_x'}{\partial x}
+&= 0\\
+\frac{\partial  v_r' }{\partial t} +
+\frac{V_{\theta}}{r} \frac{\partial v'_r}{\partial \theta} -
+\frac{2V_{\theta}v'_{\theta}}{r} +
+V_x \frac{\partial v_r'}{\partial x} &= \frac{1}{\bar{\rho}} \frac{\partial p'}{\partial r}+\frac{V_{\theta}}{\bar{\rho} r A^2}   p'
+\\
+\frac{\partial  v_{\theta}' }{\partial t} +
+v_r' \frac{\partial  V_{\theta}  }{\partial r} +
+\frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
+\frac{v'_rV_{\theta}}{r} +
+V_x \frac{\partial v_{\theta}'}{\partial x} 
+= -\frac{1}{\bar{\rho} r}	\frac{\partial p'}{\partial \theta}\\
+\frac{\partial  v_x' }{\partial t} +
+v_r' \frac{\partial  V_x  }{\partial r} +
+\frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
+V_x \frac{\partial v_x'}{\partial x} 
+&= -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} 	
+\end{align*}
 
 
 
@@ -719,8 +757,13 @@ from Equation (\ref{eqn:wavenumber_without_kr}).
     \label{eqn:wavenumber_equation}
 \end{equation}
 
-
 Solving for the axial wavenumber gives,
+
+\begin{equation}
+    k_x = \sqrt{k^2 - k_r^2}
+    \label{eqn:axial_wavenumber_equation}
+\end{equation}
+
 \section{Uniform Flow}
 
 To get the same equation but for uniform flow, the same procedure can be followed.
@@ -731,9 +774,9 @@ Starting with Equation 2.27 redimensionalized,
     \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
     \frac{1}{\tilde{r}} 
     \frac{d \tilde{p}}{d \tilde{r}} + 
-    \frac{2 \bar{\gamma} \left( \frac{d m_x}{d \tilde{r}} \right)}
-    {\left( k - \bar{\gamma} m_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
-    \left[ \left( k - \bar{\gamma} m_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
+    \frac{2 \bar{\gamma} \left( \frac{d M_x}{d \tilde{r}} \right)}
+    {\left( k - \bar{\gamma} M_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
+    \left[ \left( k - \bar{\gamma} M_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
     \bar{\gamma}^2 \right] \tilde{p}
 \end{align*}
 
@@ -743,9 +786,9 @@ Let's separate the new terms from the old ones,
     \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
     \frac{1}{\tilde{r}} 
     \frac{d \tilde{p}}{d \tilde{r}} + 
-    \frac{2 \bar{\gamma} \left( \frac{d m_x}{d \tilde{r}} \right)}
-    {\left( k - \bar{\gamma} m_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
-    \left[ \left( k - \bar{\gamma} m_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
+    \frac{2 \bar{\gamma} \left( \frac{d M_x}{d \tilde{r}} \right)}
+    {\left( k - \bar{\gamma} M_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
+    \left[ \left( k - \bar{\gamma} M_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
     \bar{\gamma} \right] \tilde{p}
 \end{align*}
 
@@ -888,20 +931,29 @@ Note B is negative when $M_x$ is positive,
 \section{Annular Duct Axial Wavenumber solution}
 
 
+In \cite{Amr2001}, the axial wavenumber for annular ducts is reported, if the 
+annulus is narrow ($(r_{max} - r_{min})/r_{mean} << 1$ , then the radius, mean
+velocity, density, and speed of sound can be expressed in terms of a perturbation
+expansion of the form,
 
-This needs to be proven,
+\begin{align}
+    r &= 1 + \epsilon \tilde{r} + \cdots,\\
+    M_t &= M_x(1) e_x + M_{\theta}(1) e_{\theta} + O(\epsilon)
+    \rho_o &= 1 + O(\epsilon) 
+    c_o^2 &=   1 + O(\epsilon)
+\end{align}
 
+where $\epsilon << 1$ 
 
-In \cite{Amr2001}, the axial wavenumber for annular ducts is reported,
 
 \begin{equation*}
-    \frac{-(\omega - m M_{\theta})M_x \pm \sqrt{\left( \omega - m M_{\theta}^2 \right) - \beta\left( m^2 + \Gamma_{m,n} ^2 \right)}}{beta^2}
+    \frac{-(\tilde{\omega} - m M_{\theta})M_x \pm \sqrt{\left( \tilde{\omega} - m M_{\theta}^2 \right) - \beta\left( m^2 + \Gamma_{m,n} ^2 \right)}}{\beta^2}
 \end{equation*}
 
 where 
-
+$\tilde{\omega} = \omega - m M_{\theta}$
+$\beta = 1- M_x^2$
 $\Gamma_{m,n}= \frac{n^2 \pi^2}{\left( r_{max} - r_{min} \right)^2}$
-
 \bibliographystyle{ieeetr}
 \bibliography{references.bib}
 \end{document}
