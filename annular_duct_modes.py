@@ -12,7 +12,7 @@ import sample.helpers as fcn
 
 
 def main():
-    r_min = 0.2                         # inner radius
+    r_min = 0.25                        # inner radius
     r_max = 1                         # outer radius
     m = 2 
     M = 0.5
